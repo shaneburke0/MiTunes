@@ -66,6 +66,8 @@ namespace MiTunes.Controllers
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
+            var fname = string.Empty;
+
             var root = HttpContext.Current.Server.MapPath(UploadPath);
             Directory.CreateDirectory(root);
             var provider = new MultipartFormDataStreamProvider(root);
@@ -86,7 +88,7 @@ namespace MiTunes.Controllers
                 var fileExt = ext[ext.Length - 1].Substring(0,3);
                 if (_songExtensions.Contains(fileExt))
                 {
-                    var fname = file.Headers.ContentDisposition.FileName.Replace(" ", "").Replace("\"", "");
+                    fname = file.Headers.ContentDisposition.FileName.Replace(" ", "").Replace("\"", "");
                     songPath = SongBasePath + fname;
 
                     try
@@ -113,8 +115,9 @@ namespace MiTunes.Controllers
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            var returnSong = db.Songs.Find(song);
-            return Request.CreateResponse(HttpStatusCode.Created, returnSong);
+            db.Entry(song).Reload();
+
+            return Request.CreateResponse(HttpStatusCode.Created, song);
         }
 
         // PUT api/values/5
@@ -125,6 +128,7 @@ namespace MiTunes.Controllers
                 song.UserId = HttpContext.Current.User.Identity.Name;
                 db.Entry(song).State = EntityState.Modified;
                 db.SaveChanges();
+                db.Entry(song).Reload();
                 return Request.CreateResponse(HttpStatusCode.OK, song);
             }
             catch (Exception ex)

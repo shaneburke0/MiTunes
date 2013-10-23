@@ -126,8 +126,24 @@ header h1 {
     overflow: auto;
 }
 
-.que ul {
+.que .title {
+    background-color: #989999;
+    color: black;
+    text-align: center;
+    padding: 10px 0px;
+    margin-bottom: 10px;
+}
+
+.que .title h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.que .queued {
+    padding: 10px;
     color: white;
+    border-bottom: 1px solid #989999;
+
 }
 
 /* library
@@ -147,8 +163,10 @@ header h1 {
 .library table th {
     display: inline-block;
     min-width: 200px;
-    text-align: center;
+    text-align: left;
     vertical-align: top;
+    width: 250px;
+    word-wrap: break-word;
 }
 
 .library table th {
@@ -187,7 +205,7 @@ header h1 {
     margin-right: 3px;
     text-decoration: none;
     color: black;
-    background-color: none;
+    background-color: transparent;
     padding: 3px;
     border-radius: 3px;
 }
@@ -207,7 +225,7 @@ header h1 {
 }
 
 .lib {
-    margin-bottom: 10px;
+    margin: 20px;
     height: 100%;
     overflow: auto;
 }
@@ -220,6 +238,7 @@ header h1 {
     padding: 3px 7px;
     text-decoration: none;
     margin-right: 5px;
+    display: inline-block;
 }
 
 .lib input {
@@ -256,7 +275,7 @@ header h1 {
 ----------------------------------------------------*/
 
 .player {
-
+    margin-bottom: 15px;
 }
 
 .player .info {

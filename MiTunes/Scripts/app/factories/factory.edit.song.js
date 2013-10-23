@@ -1,4 +1,4 @@
-﻿miTunes.factory('editSong',['$http', function ($http) {
+﻿miTunes.factory('editSong',['$http', '$log', function ($http, $log) {
     var song = new ModelSong({}),
         editSong = {
         song: song,
@@ -24,9 +24,9 @@
                 data: JSON.stringify(_song),
                 headers: {'Content-Type': 'application/json'}
             }).success(function (data, status, headers, config) {
-                alert("success");
+                $log.info(data.artist + ' - ' + data.name + " : edit successful.");
             }).error(function (data, status, headers, config) {
-                alert(status + ' ' + headers);
+                $log(data, status, headers, config);
             });
             editSong.close();
         },
@@ -36,9 +36,9 @@
                 method: "DELETE",
                 headers: { 'Content-Type': 'application/json' }
             }).success(function (data, status, headers, config) {
-                alert("success");
+                $log.info("Delete successful.");
             }).error(function (data, status, headers, config) {
-                alert(status + ' ' + headers);
+                $log(data, status, headers, config);
             });
             editSong.close();
         }

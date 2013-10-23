@@ -3,7 +3,9 @@
 </div>
 
 <section class="que" ng-controller="NowPlayingCtrl">
-    <h3>Now Playing...</h3>
+    <div class="title">
+        <h2>Now Playing...</h2>
+    </div>
     <div class="player">
         <div class="info">
             <img alt="image" />
@@ -31,11 +33,11 @@
             <button class="icon-forward" ng-click="player.next()" ng-class="{disabled: player.playlist.length < 1}"></button>
         </div>
     </div>
-    <ul>
-        <li ng-repeat="song in player.playlist">
+    <div ng-repeat="song in player.playlist">
+        <div class="queued">
             <strong>{{song.name}}</strong> - {{song.artist}}
-        </li>
-    </ul>
+        </div>
+    </div>
 </section>
 
 
@@ -46,22 +48,31 @@
             {{tab}}
         </li>
     </ul>
-    <div class="lib" ng-show="tabs.active == 'Library'">
-        <table ng-controller="LibraryCtrl">
+    <div class="lib" ng-show="tabs.active == 'Library' "ng-controller="LibraryCtrl">
+        
+        <a title="Upload new song" ng-click="new()" class="btn" >Upload Song</a>
+        <a title="Play All" ng-click="playAll()" class="btn" >Play All</a>
+        <a title="Shuffle All" ng-click="playAll()" class="btn" >Shuffle All</a>
+
+        <table >
             <tr>
                 <th>
-                    <a title="Upload new song" ng-click="new()" class="btn" >Upload Song</a>
-                    <a title="Play All" ng-click="playAll()" class="btn" >Play All</a>
-                    <a title="Shuffle All" ng-click="playAll()" class="btn" >Shuffle All</a>
+                    
                 </th>
-                <th>Title</th>
-                <th>Artist</th>
-                <th>Album</th>
+                <th>
+                    <a href="" ng-click="predicate = 'name'; reverse=!reverse">Title</a>
+                </th>
+                <th>
+                    <a href="" ng-click="predicate = 'artist'; reverse=!reverse">Artist</a>
+                </th>
+                <th>
+                    <a href="" ng-click="predicate = 'album'; reverse=!reverse">Album</a>
+                </th>
                 <th>
                     <input class="search" type="text" ng-model="searchFilter" placeholder="Search..." />
                 </th>
             </tr>
-            <tr ng-repeat="song in songs | filter: searchFilter" ng-class="['even', 'odd'][$index %2]">
+            <tr ng-repeat="song in library | filter: searchFilter | orderBy:predicate:reverse" ng-class="['even', 'odd'][$index %2]">
                 <td>
                     <span class="controls">
                         <a class="icon-play-2" title="Play Song" ng-click="playSong(song)" ></a>

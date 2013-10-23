@@ -1,4 +1,4 @@
-﻿miTunes.controller('NewSongCtrl', ['$scope', 'newSong', '$http', function ($scope, newSong, $http) {
+﻿miTunes.controller('NewSongCtrl', ['$scope', '$rootScope', 'newSong', '$http', '$log', function ($scope, $rootScope, newSong, $http, $log) {
     $scope.close = function () {
         newSong.close();
     };
@@ -57,16 +57,11 @@
         }).
         success(function (data, status, headers, config) {
             var _song = new ModelSong({ id: data.id, name: data.name, artist: data.artist, album: data.album, path: data.path });
+            $rootScope.library.push(_song);
+            newSong.close();
         }).
         error(function (data, status, headers, config) {
-            console.log('data: ' + data);
-            console.log('--------------------------------');
-            console.log('status: ' + status);
-            console.log('--------------------------------');
-            console.log('heades: ' + headers);
-            console.log('--------------------------------');
-            console.log('config: ' + config);
-            console.log('--------------------------------');
+            $log.warn(data, status, headers, config);
         });
     };
 }]);
