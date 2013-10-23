@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="miTunes">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title </title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
+</head>
+<body>
+    <header>
+        <h1>MiTunes</h1>
+        <span class="login">
+            @Html.Partial("_UserSettings")
+        </span>
+    </header>
+
+    <div id="body">
+        @RenderBody()
+    </div>
+
+    <footer>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery",
+        "~/bundles/angular",
+        "~/bundles/app")
+    @Scripts.Render("~/bundles/ajaxlogin")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿@model MiTunes.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+
+
+<div id="main-content">
+    <div class="subheader">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    
+    <p class="message-success">@ViewBag.StatusMessage</p>
+
+    <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+    <p>@Html.ActionLink("Back to my Library", "Index", "Home")</p>
+
+    <section class="block">
+        @if (ViewBag.HasLocalPassword)
+        {
+            @Html.Partial("_ChangePasswordPartial")
+        }
+        else
+        { 
+            @Html.Partial("_SetPasswordPartial")
+        }
+    </section>
+
+    <section class="block" id="externalLogins">
+        <div class="grav-edit">
+            <multi-avatar data-size="200" data-email="@User.Identity.Name"/>
+            <p>Edit your image on <a href="http://en.gravatar.com/" title="Gravatar.com" target="_blank">Gravatar.com</a></p>
+    </div>
+        @Html.Action("RemoveExternalLogins")
+
+        <h3>Add an external login</h3>
+        @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+    </section>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,40 @@
+﻿@model MiTunes.Models.LoginModel
+@{
+    ViewBag.Title = "MiTunes";
+}
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;                
+    }
+}
+
+@if (@User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_player")
+
+
+}
+else
+{
+    <div id="main-content">
+    <div class="todoList" id="loginPanel">
+        <section id="localLoginPanel">
+            <h2>Log in</h2>
+            @Html.Partial("_Login")
+        </section>
+        <section id="socialLoginPanel">
+            <h2>Log in using another service</h2>
+            @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+        <p>First time here? <a id="showRegister">Sign up</a></p>
+    </div>
+    <div class="todoList" id="registerPanel">
+        <h2>Sign up</h2>
+        @Html.Partial("_Register")
+        <p>Already signed up? <a id="showLogin">Log in</a></p>
+    </div>
+    </div>
+}

@@ -1,0 +1,137 @@
+﻿<div class="gravatar">
+    <multi-avatar data-size="100" data-email="@User.Identity.Name"/>
+</div>
+
+<section class="que" ng-controller="NowPlayingCtrl">
+    <h3>Now Playing...</h3>
+    <div class="player">
+        <div class="info">
+            <img alt="image" />
+            <div class="details">
+                <div><strong>{{currentSong.name}}</strong></div>
+                <div>{{currentSong.artist}}</div>
+                <div>{{currentSong.album}}</div>
+            </div>
+            <div>
+                <div id="progressBar"><span id="progress"></span></div>
+                <span id="playerDuration"></span>
+                <div>
+                  <input id="volume" min="0" max="1" step="0.1" type="range" ng-click="player.setVolume()" />  
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <div class="controls">
+            <button class="icon-play" ng-click="player.play(currentSong)" ng-class="{disabled: player.playing}"></button>
+            <button class="icon-pause" ng-click="player.pause()" ng-class="{disabled: !player.playing}"></button>
+            <button class="icon-stop " ng-click="player.stop()" ng-class="{disabled: !player.playing && !player.paused}"></button>
+            <button class="icon-backward" ng-click="player.previous()" ng-class="{disabled: player.playedList.length < 1}"></button>
+            <button class="icon-forward" ng-click="player.next()" ng-class="{disabled: player.playlist.length < 1}"></button>
+        </div>
+    </div>
+    <ul>
+        <li ng-repeat="song in player.playlist">
+            <strong>{{song.name}}</strong> - {{song.artist}}
+        </li>
+    </ul>
+</section>
+
+
+
+<section class="library" ng-controller="workspaceTabsCtrl">
+    <ul class="tabs" >
+        <li ng-repeat="tab in tabs" ng-click="switchTabs(tab)" ng-class="{selected: tab==tabs.active}">
+            {{tab}}
+        </li>
+    </ul>
+    <div class="lib" ng-show="tabs.active == 'Library'">
+        <table ng-controller="LibraryCtrl">
+            <tr>
+                <th>
+                    <a title="Upload new song" ng-click="new()" class="btn" >Upload Song</a>
+                    <a title="Play All" ng-click="playAll()" class="btn" >Play All</a>
+                    <a title="Shuffle All" ng-click="playAll()" class="btn" >Shuffle All</a>
+                </th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>
+                    <input class="search" type="text" ng-model="searchFilter" placeholder="Search..." />
+                </th>
+            </tr>
+            <tr ng-repeat="song in songs | filter: searchFilter" ng-class="['even', 'odd'][$index %2]">
+                <td>
+                    <span class="controls">
+                        <a class="icon-play-2" title="Play Song" ng-click="playSong(song)" ></a>
+                        <a class="icon-history" title="Play Next" ng-click="addToQueNext(song)"></a>
+                        <a class="icon-plus" title="Add to que" ng-click="addToQue(song)"></a>
+                        <a class="icon-pencil" title="Edit" ng-click="editSong(song)"></a>
+                    </span>
+                </td>
+                <td>{{song.name}}</td>
+                <td>{{song.artist}}</td>
+                <td>{{song.album}}</td>
+                <td></td>
+            </tr>
+        </table>
+        <section>
+    <!-- EDIT SONG -->
+    <div class="slide-page" id="edit-song" ng-controller="EditSongCtrl" ng-show="">
+        <h2>Edit - <span class="hightlight" ng-model="song.name"></span></h2>
+        <div class="row">
+            <label>Name: </label>
+            <input type="text" ng-model="song.name"/> 
+        </div>
+        <div class="row">
+            <label>Artist: </label>
+            <input type="text" ng-model="song.artist"/>            
+        </div>
+        <div class="row">
+            <label>Album: </label>
+            <input type="text" ng-model="song.album"/>            
+        </div>
+
+        <button ng-click="close()">Cancel</button>
+        <button ng-click="delete(song)">Delete</button>
+        <button ng-click="save(song)">Save</button>
+    </div>
+    <!-- NEW SONG -->
+    <div class="slide-page" id="new-song" ng-controller="NewSongCtrl">
+        <h2>Upload new song</h2>
+        <div class="row">
+            <label>Name: </label>
+            <input type="text" ng-model="model.name"/> 
+        </div>
+        <div class="row">
+            <label>Artist: </label>
+            <input type="text" ng-model="model.artist"/>            
+        </div>
+        <div class="row">
+            <label>Album: </label>
+            <input type="text" ng-model="model.album"/>            
+        </div>
+        <div class="row">
+            <label>Upload: </label>
+            <input type="file" file-upload multiple/>
+            <ul>
+                <li ng-repeat="file in files">{{file.name}}</li>
+            </ul>
+        </div>
+
+        <button ng-click="close()">Cancel</button>
+        <button ng-click="save(song)">Save</button>
+    </div>
+</section>
+    </div>
+
+    <div class="lib" ng-show="tabs.active == 'Playlists'">
+        <h2>Playlists</h2>
+        <div ng-controller="PlaylistsCtrl">
+
+        </div>
+    </div>
+    
+</section>
+

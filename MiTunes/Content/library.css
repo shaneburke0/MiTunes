@@ -1,0 +1,384 @@
+html {
+    background-color: #e2e2e2;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    border-top: solid 10px #000;
+    color: #333;
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+a {
+    color: #333;
+    outline: none;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-decoration: underline;
+}
+
+    a:link, a:visited,
+    a:active, a:hover {
+        color: #333;
+    }
+
+    a:hover {
+        background-color: #c7d1d6;
+    }
+
+header, footer, hgroup,
+nav, section {
+    display: block;
+}
+
+mark {
+    background-color: #a6dbed;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.clear-fix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+    color: #000;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.75em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+    h5 a:link, h5 a:visited, h5 a:active {
+        padding: 0;
+        text-decoration: none;
+    }
+
+
+/* Header
+----------------------------------------------------------*/
+header {
+    height: 45px;
+    background-color: black;
+}
+
+header h1 {
+    color: white;
+    margin-top: 0;
+}
+
+
+/* Now Playing
+----------------------------------------------------------*/
+
+.que {
+    min-width: 300px;
+    display: inline-block;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    bottom: 0;
+    background-color: #333333;
+    color: white;
+    height: 100%;
+    overflow: auto;
+}
+
+.que ul {
+    color: white;
+}
+
+/* library
+-------------------------------------------------------------*/
+
+.library {
+    display: inline-block;
+    position: absolute;
+    left: 300px;
+    right: 0;
+    top: 45px;
+    bottom: 0;
+    
+}
+
+.library table td,
+.library table th {
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.library table th {
+    font-size: 16px;
+    vertical-align: baseline;
+}
+
+.library table tr {
+    font-weight: 700;
+    color: black;
+}
+
+.library table tr.even td, 
+.library table tr.odd td {
+    padding: 5px 0;
+}
+
+.library table tr.even {
+    background-color: #666;
+    color: #c7d1d6;
+}
+
+.library table tr.odd {
+    background-color: #c7d1d6;
+    color: #333;
+}
+
+.library table tr.even:hover, 
+.library table tr.odd:hover {
+    background-color: white;
+    color: #000;
+}
+
+.library table tr .controls a,
+.library table tr .controls a:visited {
+    margin-right: 3px;
+    text-decoration: none;
+    color: black;
+    background-color: none;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.library table tr .controls a:hover {
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+}
+
+.library table tr.even .controls a:hover {
+    background-color: #666;
+}
+
+.library table tr.odd .controls a:hover {
+    background-color: #999;
+}
+
+.lib {
+    margin-bottom: 10px;
+    height: 100%;
+    overflow: auto;
+}
+
+.lib a.btn {
+    font-size: 14px;
+    background-color: #999;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 3px 7px;
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.lib input {
+    font-size: 14px;
+}
+
+.lib a.btn:hover {
+    box-shadow: #333 2px 2px;
+}
+
+/* Workspaces
+---------------------------------------------------------------*/
+.tabs {
+    list-style-type: none;
+    border-bottom: 1px solid #333;
+}
+.tabs li {
+    display: inline-block;
+    border: 1px solid #333;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+.tabs li:hover, .tabs li.selected  {
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+}
+
+/* Player
+----------------------------------------------------*/
+
+.player {
+
+}
+
+.player .info {
+    padding: 10px;
+}
+
+.player .info img {
+    width: 80px;
+    display: inline-block;
+}
+
+.player .info .details {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+.player .controls button {
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    padding-right: 5px;
+}
+
+.player .controls button:hover
+{
+    cursor: pointer;
+    color: black;
+}
+
+.player .controls .disabled, 
+.player .controls .disabled:hover {
+    color: #989999;
+}
+
+#progressBar { 
+   border:1px solid #989999; 
+   color:#989999; 
+   width:200px; 
+   height:20px;
+   border-radius: 15px;
+    display: inline-block;
+}
+#progress {
+   background-color:#989999;
+   height:20px;
+   display:inline-block;
+   border-radius: 15px;
+}
+
+
+/* Scrollbar
+  ---------------------------------------*/
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.5); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.9); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(155,155,155,0.9); 
+}
+
+/*  Sliding page
+ ------------------------------*/
+.slide-page {
+    position: absolute;
+    width: 400px;
+    right: -420px;
+    top: 50px;
+    bottom: 0;
+    background-color: #333;
+    z-index: 100;
+    color: white;
+    padding: 10px;
+    display: none;
+}
+
+.slide-page h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.slide-page .row {
+    margin: 5px;
+}
+
+.slide-page .row label {
+    display: inline-block;
+    min-width: 75px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* gravatar
+ ------------------------------*/
+
+.gravatar {
+    position: absolute;
+    z-index: 1000;
+    width: 100px;
+    left: 45%;
+    top: -10px;
+    background-color: transparent;
+}
+
+.gravatar img {
+    border-radius: 70px;
+}
